@@ -1,0 +1,57 @@
+.content {
+    padding: 7rem 0; 
+    height: 1000px;
+    background-image:linear-gradient(to right, rgba(69, 149, 214, 0.2), rgba(32, 137, 223, 0.7));
+   
+}
+  
+  p {
+    color: #b3b3b3;
+    font-weight: 300;
+}
+.container{
+    margin-top: 60px;
+    padding-left: 70px;
+    background-color: white;
+
+    border-radius: 1%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    
+}
+
+    
+ .content .contents .form-group/*, .content .bg .form-group*/ {
+    overflow: hidden;
+    margin-bottom: 0;
+    padding: 15px 15px;
+    border-bottom: none;
+    position: relative;
+    background: #edf2f5;
+    border-bottom: 1px solid #e6edf1;
+}
+    
+.content .contents .form-group input{
+    
+    background: transparent;
+}
+.content .contents .form-group.first{
+  
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+.content .contents .form-group.last {
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.content .contents .form-group label {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 0;
+    color: #b3b3b3;
+}
+ .form-content{
+     margin-top:70px;
+    
+ }
+  
+  

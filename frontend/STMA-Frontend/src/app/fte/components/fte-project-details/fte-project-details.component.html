@@ -1,0 +1,354 @@
+
+
+<button  class="btn btn-light b" (click)="trackTask()" style=" box-shadow: rgba(16, 131, 238, 0.24) 0px 3px 8px;width: 300px;margin-left: 95px;margin-top: 16px;">
+    {{projectName}}
+</button>
+<button class="btn btn-light b" (click)="dis()" style=" box-shadow: rgba(16, 131, 238,0.24) 0px 3px 8px;width: 300px;margin-left: 40px;margin-top: 16px;">Discussion Forum</button>
+<button class="btn btn-light b" (click)="members()" style=" box-shadow: rgba(16, 131, 238,0.24) 0px 3px 8px;width: 300px;margin-left: 40px;margin-top: 16px;">Point Of Contact</button>
+<button class="btn btn-light b" (click)="pointOfContact()" style=" box-shadow: rgba(16, 131, 238,0.24) 0px 3px 8px;width: 300px;margin-left: 40px;margin-top: 16px;">Members</button>
+<div *ngIf="showTask" style="margin-top: 80px;">
+
+   
+   <div class="main-container">
+    <!-- <h1 style="color:darkblue"> <span style="color: black;font-size: 19px;">Tracks / All Tracks / </span> Track Details</h1>  -->
+     <div class="track-details">
+      
+        <div class="left">
+      <strong> <span>Description</span>  </strong>  <br><br> 
+     <p style="font-size: 17px;">{{projectDescription}}</p>
+     <div class="a">
+         <span ><strong>Duration Of Track:</strong> <h3 style="padding-top:15px;color:red">{{projectStartDate}} to {{projectEndDate}}</h3></span>
+         
+         <span style="padding-left:120px;"><strong>Product Owner:</strong><h3 style="padding-top:15px;">{{owner}}</h3></span>
+         <span style="padding-left:120px;display: flex;">
+           
+             <form [formGroup]="memberForm" style="width: 300px;height: 130px;">
+                <strong >Add Members in Project:</strong>
+                 <ng-multiselect-dropdown   formControlName="members"  
+                 [settings]="dropdownSettings"
+                 [data]="dropdownList"
+                 [placeholder]="'Select Members for Project' "
+                  (onSelect)="onMemberSelect($event)"
+                 >
+                
+                 </ng-multiselect-dropdown>
+                 
+             </form>
+             <button (click)="membersSubmit()" class="btn btn-primary" style="height: 35px;width: 130px;margin-left: 10px;margin-top: 36px;">Add Members</button>
+          
+         </span>
+         <span style="padding-left:120px;">
+            <strong>Create Task:</strong><br/>
+             <button class="btn btn-warning" (click)="createTask()" style="margin-top: 15px;">Create Task</button>
+         </span>
+         
+     </div>
+     </div>
+     
+     <!-- <div class="right">
+        <mat-form-field appearance="fill" class="members">
+            <mat-label>Members</mat-label>
+            <mat-select disableRipple>
+              <mat-option value="1">Option 1</mat-option>
+              <mat-option value="2">Option 2</mat-option>
+              <mat-option value="3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+     </div> -->
+     
+     </div>
+     <br/>
+     
+      <h2 style="margin-top: 110px;"> Tasks Assigned: </h2> 
+     <div class="tab" style="width: 90%; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+        <table class="table">
+            <thead class="thead-dark" style="height: 50px;">
+              <tr>
+                <th>Feature Name</th>
+                <th>Product Owner</th>
+                <th>Assignee</th>
+                <th>Priority</th>
+                  <th>DeadLine</th>
+                  <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let a of projectTasks | filter:f" style="height: 50px;border-bottom: 3px solid silver;">
+                <td style="padding-top: 19px;"><strong>{{a.name}}</strong></td>
+                <td style="padding-top: 19px;">{{owner}}</td>
+                <td style="padding-top: 19px;">{{a.assignee_name}}</td>
+                <td style="color:darkblue;padding-top: 19px;">{{a.priority}}</td>
+                <td style="color: red;padding-top: 19px;">{{a.deadline}}</td>
+                <!-- <td>{{a.status}}</td> -->
+                <!-- <td *ngIf="{{a.status}}=='Done'"><button class="btn btn-primary">{{a.status}}</button></td>
+                <td *ngIf="{{a.status}}=='Doing'"><button class="btn btn-danger">{{a.status}}</button></td> -->
+             <div [ngSwitch]="a.status" style="border-bottom: 1px solid silver;">
+                 <td *ngSwitchCase="'Done'"><button class="btn btn-success" style="width: 100px;" (click)="changeText(a.id,a.status,a.assignee_name)">{{a.status}}</button></td>
+                 <td *ngSwitchCase="'Doing'"><button class="btn btn-danger" style="width: 100px;" (click)="changeText(a.id,a.status,a.assignee_name)">{{a.status}}</button></td>
+                 <td *ngSwitchCase="'To_do'"><button class="btn btn-warning" style="width: 100px;" (click)="changeText(a.id,a.status,a.assignee_name)">TO DO</button></td>
+             </div>
+            <td><button class="btn btn-primary" (click)="editTask(a.id)" style="width: 90px;">Edit</button></td>
+            
+            </tr>
+              
+            </tbody>
+          </table>
+      <!-- <div *ngFor="let a of trackTasks"><app-card [id]="a.id" [category]="'track-task-details'" [trackId]="trackId" [name]="a.name" [description]="a.description"  [date]="a.deadline" [imageUrl]="a.image_url" ></app-card></div>
+      -->
+  </div>
+
+</div>
+
+</div>
+<div *ngIf="showDiscuss" style="margin-top: 60px;">
+    
+
+<!--example-headers-align-->
+<div class="outer">
+    <div class="search">
+       <h2 style="font-size: 23px;
+       color: darkblue;margin-left: 52px;"> Post your doubts here:</h2>  
+      <div class="search-box">
+        <input type="text"  class="form-control rounded" name="f" [(ngModel)]="f"  placeholder="Search for post" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-dark">search</button>
+  
+      </div>
+     
+    </div>
+    
+  <div class="create-convo">
+    <mat-accordion class="main" multi >
+      <div class="new-convo">
+       
+       
+      </div>
+      
+      <mat-expansion-panel>
+        <mat-expansion-panel-header style="background-color: #004a9f" >
+        
+        <strong style="color:white;">New Conversation</strong> 
+        </mat-expansion-panel-header>
+    
+   <div class="v">
+     <input type="text" [(ngModel)]="title" placeholder="Enter the title">
+     <br>
+  
+     <textarea type="text" [(ngModel)]="content" placeholder="Enter the content"></textarea>
+     <br>
+     <!-- <input type="text" [(ngModel)]="track" placeholder="Enter the track"> -->
+     <br/>
+     <button class="btn btn-primary" style="margin-left: 30px;" (click)="addConv()">Add Post</button>
+  
+   </div>
+      </mat-expansion-panel>
+      
+     
+    </mat-accordion>
+  
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="contain">
+    <h3 style="color: #002b5c;font-weight: bold;text-decoration: underline;">Posts:</h3>
+  <mat-accordion class="main" multi *ngFor="let a of con | filter:f">
+    <div class="post">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16" (click)="pin()">
+        <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+      </svg >
+      <div class="date">
+        <h3 style="padding-left:10px ;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="color:#002b5c ;">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>     {{a.created_by_name}}</h3>
+          <h4>  {{a.created_on.substring(0,10)}} {{a.created_on.substring(11,16)}} </h4>
+      </div>
+     
+      <h4 style="padding-left: 10px;"><strong>{{a.title}}</strong></h4>
+      
+      
+      <p style="padding-left: 10px;">{{a.content}}</p>
+      
+    </div>
+    <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16" (click)="like(a.id)"  style="margin-left: 98%;" >
+      <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+    </svg>
+    <!-- <svg *ngIf="!likeClick" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16" style="margin-left: 98%;">
+      <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
+    </svg> -->
+    <h5 style="margin-left: 98%;">{{a.like_count}}</h5>
+    <mat-expansion-panel style="margin-top: 5px;">
+      <mat-expansion-panel-header>
+      <strong>Comments <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
+        <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+      </svg>+{{a.projectdiscussioncomment_set.length}}</strong> 
+  
+      </mat-expansion-panel-header>
+  
+  <ul>
+    <li *ngFor="let b of a.projectdiscussioncomment_set"><span style="display: flex;">
+      <h3>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="color:#002b5c ;">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+      </svg> 
+     {{b.created_by_name}} : {{b.commment}}</h3>
+     <!-- <h4 style="padding-left: 76%;"> {{b.created_on.substring(0,10)}} {{b.created_on.substring(11,16)}}</h4> -->
+    </span></li>
+      
+    
+  </ul>
+  <mat-accordion class="main" multi >
+    <div class="new-convo">
+     
+     
+    </div>
+    
+    <mat-expansion-panel>
+      <mat-expansion-panel-header style="background-color: #004a9f" >
+      
+      <strong style="color: white;">Add Comment</strong> 
+      </mat-expansion-panel-header>
+  
+  <div class="v">
+   <input type="text" [(ngModel)]="commment" placeholder="Enter the comment" style=" width: 420px;
+   height: 30px;
+   margin: 8px;
+   margin-left: 30px;
+   border: none;
+   border-radius: 5px;">
+   <br>
+  
+  
+   <button class="btn btn-primary" style="margin-left: 30px;margin-top: 10px;" (click)="addComment(a.id)">Add Comment</button>
+  
+  </div>
+    </mat-expansion-panel>
+    
+   
+  </mat-accordion>
+      
+  
+    </mat-expansion-panel>
+    
+   
+  </mat-accordion>
+  </div>
+  
+  </div>
+</div>
+
+<div *ngIf="showMembers" style="margin-top: 30px;">
+    
+    <div class="poc-main-container">
+        <div class="image">
+            <div class="img"></div>
+             <div class="overlay"></div>
+             <div class="text">
+                <div class="input-group">
+                    <input type="text"  class="form-control rounded" name="f" [(ngModel)]="discussf"  placeholder="Search for member" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-dark">search</button>
+                  </div>
+    
+                </div>
+            
+        </div>
+        <div class="content">
+            <div class="heading">
+                
+                <br><br>
+                <h2>Members</h2>
+            </div>
+            <div class="tab">
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Post</th>
+                          <th>Designation</th>
+                          <th>Track</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let a of contacts | filter:f">
+                        <td ><strong>{{a.name}}</strong></td>
+                        <td>{{a.email}}</td>
+                        <td style="color:darkblue;">{{a.post}}</td>
+                        <td>{{a.designation}}</td>
+                        <td>{{a.track}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+       
+    </div>
+     
+    
+</div>
+<div *ngIf="showPoc" style="margin-top: 50px;">
+
+<div class="poc-main-container">
+  <div class="image">
+      <div class="img"></div>
+       <div class="overlay"></div>
+       <div class="text">
+          <div class="input-group">
+              <input type="text"  class="form-control rounded" name="f" [(ngModel)]="discussf"  placeholder="Search for member" aria-label="Search" aria-describedby="search-addon" />
+              <button type="button" class="btn btn-dark">search</button>
+            </div>
+
+          </div>
+      
+  </div>
+  <div class="content">
+      <div class="heading">
+          
+          <br><br>
+          <h2>Members</h2>
+      </div>
+      <div class="tab">
+          <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th style="padding-left: 30px;">Name</th>
+                  <th style="padding-left: 300px;">Email</th>
+                  <th style="padding-right: 80px;">Rating</th>
+                   
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let a of users | filter:f">
+                  <td ><strong>{{a.name}}</strong></td>
+                  <td style="padding-left: 250px;">{{a.email}}</td>
+                  <td style="color:darkblue;">{{a.rating}}</td>
+                 
+                </tr>
+                
+              </tbody>
+            </table>
+      </div>
+  </div>
+ 
+</div>
+</div>

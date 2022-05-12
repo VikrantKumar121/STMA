@@ -1,0 +1,37 @@
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;font-size: 19px;">Tracks / All Tracks / </span> Track Details</h1> 
+     <div class="track-details">
+      
+        <div class="left">
+     <strong> <span>{{trackName}}</span>  </strong>  <br><br>
+     <p>{{trackDescription}}</p>
+     <div class="a">
+         <span ><strong>End Date:</strong> <h3>{{trackEndDate}}</h3></span>
+         <span style="padding-left:220px"><strong>Owner:</strong><h3>{{owner}}</h3></span>
+         
+     </div>
+     </div>
+     
+     <div class="right">
+        <mat-form-field appearance="fill" class="members">
+            <mat-label>Members</mat-label>
+            <mat-select disableRipple>
+              <mat-option value="1">Option 1</mat-option>
+              <mat-option value="2">Option 2</mat-option>
+              <mat-option value="3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+     </div>
+     
+     </div>
+     <br/>
+     <div class="discuss">
+       <button class="btn btn-primary" (click)="discuss()">Discuss</button>
+     </div>
+     <h2 style="margin-top: 30px;"> Courses to be completed:</h2>
+     <div class="cards-container">
+      <div *ngFor="let a of trackTasks"><app-card [id]="a.id" [category]="'track-task-details'" [trackId]="trackId" [name]="a.name" [description]="a.description"  [date]="a.deadline" [imageUrl]="a.image_url" ></app-card></div>
+     
+  </div>
+
+</div>

@@ -1,0 +1,72 @@
+
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;">Track / </span>Create Track</h1> 
+    <div class="content">
+        <form [formGroup]="projectForm">
+            <div class="name">
+                <h3>Name:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Name of Project</mat-label> -->
+                    <input matInput formControlName="name" >
+                    <div *ngIf="projectForm.get('name').errors&&(projectForm.get('name').touched&&projectForm.get('name').invalid)" class="err">
+                        <div *ngIf="projectForm.get('name').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="description">
+                <h3>Description:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Description of Project</mat-label> -->
+                    <textarea matInput  formControlName="description" ></textarea>
+                    <div *ngIf="projectForm.get('description').errors&&(projectForm.get('description').touched&&projectForm.get('description').invalid)" class="err">
+                        <div *ngIf="projectForm.get('description').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="dates">
+                
+                <div class="startDate">
+                    <h3>Start Date:</h3>
+                    <mat-form-field appearance="fill">
+              
+                        <input matInput [matDatepicker]="pickStartDate" formControlName="start_date" > 
+                        <div *ngIf="projectForm.get('start_date').errors&&(projectForm.get('start_date').touched&&projectForm.get('start_date').invalid)" class="err">
+                            <div *ngIf="projectForm.get('start_date').errors?.['required']">This field is required</div>
+                         
+                          </div>
+                        <mat-datepicker-toggle matSuffix [for]="pickStartDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickStartDate></mat-datepicker>
+                       
+                      </mat-form-field>
+                      
+                </div>
+                <div class="endDate">
+                    <h3>End Date:</h3>
+                    <mat-form-field appearance="fill">
+              
+                        <input matInput [matDatepicker]="pickEndDate" formControlName="end_date" >
+                        <div *ngIf="projectForm.get('end_date').errors&&(projectForm.get('end_date').touched&&projectForm.get('end_date').invalid)" class="err">
+                            <div *ngIf="projectForm.get('end_date').errors?.['required']">This field is required</div>
+                         
+                          </div>
+                        <mat-datepicker-toggle matSuffix [for]="pickEndDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickEndDate></mat-datepicker>
+                       
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="submi">
+                <button [disabled]="!projectForm.valid" type="submit" (click)="postProject()" class="btn btn-primary" style="margin-left: 47%;">Submit</button>
+            </div>
+          
+        </form>
+       
+        
+        
+
+    </div>
+</div>

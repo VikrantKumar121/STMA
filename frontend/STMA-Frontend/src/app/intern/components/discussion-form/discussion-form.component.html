@@ -1,0 +1,147 @@
+
+<!--example-headers-align-->
+<div class="outer">
+  <div class="search">
+    <h1 style="color:darkblue;margin-left: 19px;"> <span style="color: black;font-size: 19px;">Tracks / </span> Discussion Forum</h1> 
+    <div class="search-box">
+      <input type="text"  class="form-control rounded" name="f" [(ngModel)]="f"  placeholder="Search for post" aria-label="Search" aria-describedby="search-addon" />
+      <button type="button" class="btn btn-dark">search</button>
+
+    </div>
+   
+  </div>
+  
+<div class="create-convo">
+  <mat-accordion class="main" multi >
+    <div class="new-convo">
+     
+     
+    </div>
+    
+    <mat-expansion-panel>
+      <mat-expansion-panel-header style="background-color: #004a9f" >
+      
+      <strong style="color:white;">New Conversation</strong> 
+      </mat-expansion-panel-header>
+  
+ <div class="v">
+   <input type="text" [(ngModel)]="title" placeholder="Enter the title">
+   <br>
+
+   <textarea type="text" [(ngModel)]="content" placeholder="Enter the content"></textarea>
+   <br>
+   <!-- <input type="text" [(ngModel)]="track" placeholder="Enter the track"> -->
+   <br/>
+   <button class="btn btn-primary" style="margin-left: 30px;" (click)="addConv()">Add Post</button>
+
+ </div>
+    </mat-expansion-panel>
+    
+   
+  </mat-accordion>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="contain">
+  <h3 style="color: #002b5c;font-weight: bold;text-decoration: underline;">Posts:</h3>
+<mat-accordion class="main" multi *ngFor="let a of con | filter:f">
+  <div class="post">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16" (click)="pin()">
+      <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+    </svg >
+    <div class="date">
+      <h3 style="padding-left:10px ;color:#002b5c ;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+      </svg>     {{a.created_by_id__name}}</h3>
+      <h4>date</h4>
+
+    </div>
+   
+    <h4 style="padding-left: 10px;"><strong>{{a.title}}</strong></h4>
+    
+    
+    <p style="padding-left: 10px;">{{a.content}}</p>
+    
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16" (click)="like()" style="margin-left: 98%;">
+    <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+  </svg>
+
+  <mat-expansion-panel style="margin-top: 5px;">
+    <mat-expansion-panel-header>
+    <strong>Comments <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
+      <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
+    </svg></strong> 
+
+    </mat-expansion-panel-header>
+
+<ul>
+  <li *ngFor="let b of a.comments"><span>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+    </svg> 
+    <strong>{{b.created_by_id__name}} : </strong></span>{{b.commment}}</li>
+    
+  
+</ul>
+<mat-accordion class="main" multi >
+  <div class="new-convo">
+   
+   
+  </div>
+  
+  <mat-expansion-panel>
+    <mat-expansion-panel-header style="background-color: #004a9f" >
+    
+    <strong style="color: white;">Add Comment</strong> 
+    </mat-expansion-panel-header>
+
+<div class="v">
+ <input type="text" [(ngModel)]="commment" placeholder="Enter the comment" style=" width: 420px;
+ height: 30px;
+ margin: 8px;
+ margin-left: 30px;
+ border: none;
+ border-radius: 5px;">
+ <br>
+
+
+ <button class="btn btn-primary" style="margin-left: 30px;margin-top: 10px;" (click)="addComment(a.id)">Add Comment</button>
+
+</div>
+  </mat-expansion-panel>
+  
+ 
+</mat-accordion>
+    
+
+  </mat-expansion-panel>
+  
+ 
+</mat-accordion>
+</div>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="allProjects-container">
+    <div class="allProjects-heading-container">
+        <div class="project-heading">
+            <h1 style="color:darkblue"> <span style="color: black;">Project /</span>All Projects</h1> 
+        </div>
+        <div >
+            <!-- add track button for fte -->
+        </div>
+    </div>
+
+    
+    <div class="allprojects-cards-container">
+        <label for="allproject-cards-container">All Allocated Projects</label>
+        <div class="cards-container">
+
+      <div *ngFor="let a of projects">
+          <app-card [id]="a.id" [category]="'project'" [name]="a.name" [description]="a.description" [owner]="a.owner_name" [date]="a.end_date" [imageUrl]="a.image_url" [startDate]="a.created_on"></app-card>
+      </div>
+
+
+
+            <!-- <div><app-card [id]="'2'" [category]="'project'"></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div> -->
+        </div>
+    </div>
+</div>

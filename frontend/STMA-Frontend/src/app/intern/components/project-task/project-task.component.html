@@ -1,0 +1,63 @@
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;font-size: 19px;">Projects / All Projects / </span> Project Details</h1> 
+     <div class="track-details">
+      
+        <div class="left">
+     <strong> <span>{{projectName}}</span>  </strong>  <br><br>
+     <p>{{projectDescription}}</p>
+     <div class="a">
+         <span ><strong>DeadLine to complete this project:</strong> <h3 style="padding-top: 17px;">{{projectEndDate}}</h3></span>
+         <span style="padding-left:220px"><strong>Owner:</strong><h3>{{owner}}</h3></span>
+         
+     </div>
+     </div>
+     
+     <!-- <div class="right">
+        <mat-form-field appearance="fill" class="members">
+            <mat-label>Members</mat-label>
+            <mat-select disableRipple>
+              <mat-option value="1">Option 1</mat-option>
+              <mat-option value="2">Option 2</mat-option>
+              <mat-option value="3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+     </div> -->
+     
+     </div>
+      <div class="task">
+       <div class="todo">
+         <h2 style="padding-left: 180px;">TODO</h2>
+<ul>
+  <li *ngFor="let a of todo"><app-card [id]="a.id" [category]="'project-task'" [projectId]="projectId" [name]="a.name" [description]="a.description"  [date]="a.deadline" [imageUrl]="a.image_url"></app-card></li>
+  
+</ul>
+       </div>
+       <div class="processing">
+        <h2 style="padding-left: 45%;">Processing</h2>
+        <!-- <ul>
+          <li><app-card></app-card></li>
+          <li><app-card></app-card></li>
+        </ul> -->
+        <ul>
+          <li *ngFor="let a of doing"><app-card [id]="a.id" [category]="'project-task'" [projectId]="projectId" [name]="a.name" [description]="a.description"  [date]="a.deadline" [imageUrl]="a.image_url"></app-card></li>
+          
+        </ul>
+       </div>
+<div class="completed">
+  <h2 style="padding-left: 180px;">Completed</h2>
+  <!-- <ul>
+    <li><app-card></app-card></li>
+    <li><app-card></app-card></li>
+  </ul> -->
+  <ul>
+    <li *ngFor="let a of done"><app-card [id]="a.id" [category]="'project-task'" [projectId]="projectId" [name]="a.name" [description]="a.description"  [date]="a.deadline" [imageUrl]="a.image_url"></app-card></li>
+    
+  </ul>
+</div>
+
+
+     </div> 
+    
+
+</div>
+

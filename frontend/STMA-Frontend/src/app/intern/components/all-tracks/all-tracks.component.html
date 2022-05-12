@@ -1,0 +1,26 @@
+<div class="allTrack-container">
+    <div class="alltrack-heading-container">
+        <div class="track-heading">
+            <h1 style="color:darkblue"> <span style="color: black;">Intern / </span>Tracks</h1> 
+        </div>
+        <div >
+            <!-- add track button for fte -->
+        </div>
+    </div>
+
+    
+    <div class="alltrack-cards-container">
+        <label for="alltrack-cards-container">All Available Tracks</label>
+        <div class="cards-container">
+            <div *ngFor="let a of tracks"><app-card [id]="a.id" [category]="'track'" [name]="a.name" [description]="a.description" [owner]="a.owner_name" [date]="a.end_date" [imageUrl]="a.image_url" [startDate]="a.start_date"></app-card></div>
+            <!-- <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div>
+            <div><app-card></app-card></div> -->
+        </div>
+    </div>
+</div>
