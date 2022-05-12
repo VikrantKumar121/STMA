@@ -1,0 +1,105 @@
+
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;">FTE / </span>Edit Task</h1> 
+    <div class="content">
+        <form [formGroup]="taskForm">
+            <div class="name">
+                <h3>Name:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Name of Project</mat-label> -->
+                    <input matInput formControlName="name" >
+                    <div *ngIf="taskForm.get('name').errors&&(taskForm.get('name').touched&&taskForm.get('name').invalid)" class="err">
+                        <div *ngIf="taskForm.get('name').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="description">
+                <h3>Description:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Description of Project</mat-label> -->
+                    <textarea matInput  formControlName="description" ></textarea>
+                    <div *ngIf="taskForm.get('description').errors&&(taskForm.get('description').touched&&taskForm.get('description').invalid)" class="err">
+                        <div *ngIf="taskForm.get('description').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="divi">
+            <div class="priority">
+                <h3>Priority:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Name of Project</mat-label> -->
+                    <input matInput formControlName="priority" >
+                    <div *ngIf="taskForm.get('priority').errors&&(taskForm.get('priority').touched&&taskForm.get('priority').invalid)" class="err">
+                        <div *ngIf="taskForm.get('priority').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="type">
+                <h3>Type:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Name of Project</mat-label> -->
+                    <input matInput formControlName="type" >
+                    <div *ngIf="taskForm.get('type').errors&&(taskForm.get('type').touched&&taskForm.get('type').invalid)" class="err">
+                        <div *ngIf="taskForm.get('type').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+        </div>
+            <div class="div">
+                
+                <div class="deadline">
+                    <h3>Deadline:</h3>
+                    <mat-form-field appearance="fill">
+              
+                        <input matInput [matDatepicker]="pickEndDate" formControlName="deadline" >
+                        <div *ngIf="taskForm.get('deadline').errors&&(taskForm.get('deadline').touched&&taskForm.get('end_date').invalid)" class="err">
+                            <div *ngIf="taskForm.get('deadline').errors?.['required']">This field is required</div>
+                         
+                          </div>
+                        <mat-datepicker-toggle matSuffix [for]="pickEndDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickEndDate></mat-datepicker>
+                       
+                      </mat-form-field>
+                </div>
+        
+            <div class="assignee">
+               
+                  
+        
+
+                    <h3>Assignee:</h3>
+                    <mat-form-field appearance="fill">
+                      <!-- <mat-label>Select</mat-label> -->
+                      <mat-select formControlName="assignee">
+                        <mat-option *ngFor="let assignee of assigneeList" [value]="assignee.id">{{assignee.name}}</mat-option>
+                        
+                      </mat-select>
+                     
+                    </mat-form-field>
+                  
+
+                  
+
+                  
+                 
+            </div>
+        </div>
+            <div class="submi">
+                <button [disabled]="!taskForm.valid" type="submit" (click)="editTask()" class="btn btn-primary" style="margin-left: 47%;">Submit</button>
+            </div>
+          
+        </form>
+       
+        
+        
+
+    </div>
+</div>

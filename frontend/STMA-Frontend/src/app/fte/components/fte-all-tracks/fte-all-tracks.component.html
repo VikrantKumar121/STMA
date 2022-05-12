@@ -1,0 +1,28 @@
+
+<div class="allProjects-container">
+    <div class="allProjects-heading-container">
+        <div class="project-heading">
+            <h1 style="color:darkblue"> <span style="color: black;">Tracks /</span>All Tracks</h1> 
+        </div>
+        <div >
+            <!-- add track button for fte -->
+        </div>
+    </div>
+
+    
+    <div class="allprojects-cards-container">
+        <label for="allproject-cards-container">All Allocated Projects</label>
+    <div class="cards-container"> 
+       
+
+     <div *ngFor="let a of tracks">
+          <app-fte-card [id]="a.id" [category]="'track-details'" [name]="a.name" [description]="a.description" [owner]="a.owner_name" [date]="a.end_date" [imageUrl]="a.image_url" [startDate]="a.created_on"></app-fte-card>
+      </div> 
+
+
+
+           
+          </div>  
+    </div>
+</div>
+

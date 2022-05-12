@@ -1,0 +1,32 @@
+<div class="card border-primary mb-3" style="width: 18rem;">
+   
+    <img style="height: 150px;" class="card-img-top" src="{{imageUrl}}" alt="Card image cap"> 
+    <!-- <div class="card-heading">
+      <h1 > Project Details</h1> 
+    </div> -->
+   
+    <div class="card-body">
+  
+        <h3 class="card-title">{{name}}</h3>
+        <!-- <p class="card-text">{{description}}</p> -->
+        
+        <!-- <p>Duration:{{startDate}} to {{date}}</p> -->
+        <div class="card-detail-container">
+  
+          <div class="owner-detail">
+              <div class="owner-name"><strong>Track Lead:</strong></div>
+              <div class="owner-name-value">{{owner}}</div>
+          </div>
+  
+         <div class="ending-detail">
+              <div class="end-date"><strong>End Date:</strong> </div>
+              <div class="end-date-value"><h3>{{date}}</h3></div>
+          </div>  
+  
+          <div>
+              <div class="details-btn-container"><button type="button" class="btn btn-primary" (click)="details()">Details</button></div>
+          </div>
+  
+        </div>
+      </div>
+  </div>

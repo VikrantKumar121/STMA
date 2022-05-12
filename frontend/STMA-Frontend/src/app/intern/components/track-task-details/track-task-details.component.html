@@ -1,0 +1,33 @@
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;font-size: 25px;">Tracks / </span> Study Material </h1> 
+    <br/>
+    <br/>
+    <span style="color:darkblue;font-size: 24px;">{{name}}</span>
+    <div class="description">
+      <h3><strong>Description:</strong></h3>
+        {{description}}
+        <h3 style="padding-top: 40px;"><strong>Additional Refrences:</strong></h3>
+        <ul>
+  <li *ngFor="let a of links">
+
+    <a href="{{a}}">{{a}} </a> 
+    
+ </li> 
+ <br/>
+ <br/>
+
+ 
+        </ul>
+        <br/>
+        <!-- <h3><strong>Sub -Tasks</strong></h3>
+        <mat-form-field appearance="fill" class="members">
+            <mat-label>Sub -Tasks</mat-label>
+            <mat-select disableRipple>
+              <mat-option value="1">Option 1</mat-option>
+              <mat-option value="2">Option 2</mat-option>
+              <mat-option value="3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+    </div>
+</div>

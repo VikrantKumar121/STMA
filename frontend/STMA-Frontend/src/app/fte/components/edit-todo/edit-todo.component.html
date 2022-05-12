@@ -1,0 +1,117 @@
+
+<div class="main-container">
+    <h1 style="color:darkblue"> <span style="color: black;">FTE / </span>Edit ToDo</h1> 
+    <div class="content">
+        <form [formGroup]="todoForm">
+            <div class="name">
+                <h3>Name:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Name of Project</mat-label> -->
+                    <input matInput formControlName="name" formControlName="name">
+                    <div *ngIf="todoForm.get('name').errors&&(todoForm.get('name').touched&&todoForm.get('name').invalid)" class="err">
+                        <div *ngIf="todoForm.get('name').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="description">
+                <h3>Description:</h3>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <!-- <mat-label>Description of Project</mat-label> -->
+                    <textarea matInput  formControlName="description" formControlName="description" ></textarea>
+                    <div *ngIf="todoForm.get('description').errors&&(todoForm.get('description').touched&&todoForm.get('description').invalid)" class="err">
+                        <div *ngIf="todoForm.get('description').errors?.['required']">This field is required</div>
+                     
+                      </div>
+                  </mat-form-field>
+                 
+            </div>
+            <div class="link">
+              
+                  
+                    <h4>Links</h4>
+                   
+                      <mat-form-field class="example-chip-list" appearance="fill">
+                       
+                        <mat-chip-list #chipList aria-label="Fruit selection" formControlName="link">
+                           
+                          <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                            {{fruit}}
+                            <button matChipRemove>
+                              <mat-icon>cancel</mat-icon>
+                            </button>
+                          </mat-chip>
+                          <input  #link placeholder="New Link..."
+                                 [matChipInputFor]="chipList"
+                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                 [matChipInputAddOnBlur]="addOnBlur"
+                                 (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                      </mat-form-field>
+                    <!-- <mat-form-field class="example-full-width" appearance="fill">
+                    
+                      <input matInput placeholder="Links"  #link >
+                     
+                    
+                      
+                    </mat-form-field>
+                    <button (click)="addLink(link)" class="btn btn-primary" >add</button> -->
+                  
+                    <!-- <ul class="tag-list">
+                      <li *ngFor="let link of linkList">{{link}}</li>
+                  </ul> -->
+                 
+            </div>
+            
+            
+            
+                
+                <div class="deadline">
+                    <h3>Deadline:</h3>
+                    <mat-form-field appearance="fill">
+              
+                        <input matInput [matDatepicker]="pickEndDate" formControlName="deadline" >
+                        <div *ngIf="todoForm.get('deadline').errors&&(todoForm.get('deadline').touched&&todoForm.get('end_date').invalid)" class="err">
+                            <div *ngIf="todoForm.get('deadline').errors?.['required']">This field is required</div>
+                         
+                          </div>
+                        <mat-datepicker-toggle matSuffix [for]="pickEndDate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickEndDate></mat-datepicker>
+                       
+                      </mat-form-field>
+                </div>
+            
+            <!-- <div class="assignee">
+               
+                  <div>
+        
+
+                    <h3>Assignee:</h3>
+                    <mat-form-field appearance="fill">
+                      <mat-label>Select</mat-label>
+                      <mat-select formControlName="assignee">
+                        <mat-option *ngFor="let assignee of memberList" [value]="assignee.id">{{assignee.name}}</mat-option>
+                        
+                      </mat-select>
+                     
+                    </mat-form-field>
+                  </div> -->
+
+                  
+
+                  
+                 
+            <!-- </div> -->
+            <div class="submi">
+                <button [disabled]="!todoForm.valid" type="submit" (click)="postTodo()" class="btn btn-primary" style="margin-left: 47%;">Submit</button>
+            </div>
+          
+        </form>
+       
+        
+        
+
+    </div>
+</div>
+

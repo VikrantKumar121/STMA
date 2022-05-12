@@ -1,0 +1,20 @@
+.main-container{
+    height: 850px;
+    padding-left: 30px;
+    h1{
+        color:blue;
+            
+            
+        text-shadow: 2px 2px 2px #CCCCCC;
+        font-family: 'Trocchi', serif; font-size: 19px; font-weight: normal; line-height: 48px; 
+       }  
+       .description{
+           margin-top: 24px;
+           ul{
+               list-style-type: none;
+               li a{
+                   font-size: 18px;
+               }
+           }
+       }
+}

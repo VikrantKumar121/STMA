@@ -1,0 +1,46 @@
+ <div class="poc-main-container">
+    <div class="image">
+        <div class="img"></div>
+         <div class="overlay"></div>
+         <div class="text">
+            <div class="input-group">
+                <input type="text"  class="form-control rounded" name="f" [(ngModel)]="f"  placeholder="Search for member" aria-label="Search" aria-describedby="search-addon" />
+                <button type="button" class="btn btn-dark">search</button>
+              </div>
+
+            </div>
+        
+    </div>
+    <div class="content">
+        <div class="heading">
+            <h1><strong>HUS SDE 22.0</strong></h1>
+            <br><br>
+            <h2>Members</h2>
+        </div>
+        <div class="tab">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Post</th>
+                      <th>Designation</th>
+                      <th>Track</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let a of content | filter:f">
+                    <td ><strong>{{a.name}}</strong></td>
+                    <td>{{a.email}}</td>
+                    <td style="color:darkblue;">{{a.post}}</td>
+                    <td>{{a.designation}}</td>
+                    <td>{{a.track}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+        </div>
+    </div>
+   
+</div>
+ 
